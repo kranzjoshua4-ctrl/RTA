@@ -2,8 +2,9 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 import { submitContact } from "@/lib/actions";
+import type { ActionState } from "@/lib/types";
 
-const initialState = { ok: false, message: "" };
+const initialState: ActionState = { ok: false, message: "" };
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -11,7 +12,7 @@ function SubmitButton() {
 }
 
 export function ContactForm() {
-  const [state, action] = useFormState(submitContact as never, initialState);
+  const [state, action] = useFormState(submitContact, initialState);
 
   return (
     <form action={action} className="grid gap-4 rounded-2xl border border-slate-200 p-6">
@@ -26,6 +27,7 @@ export function ContactForm() {
       </div>
       <input name="projectType" placeholder="Projektart" className="rounded border p-3" required />
       <textarea name="message" placeholder="Nachricht" className="min-h-36 rounded border p-3" required />
+      <input type="file" name="attachment" className="rounded border p-3" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" />
       <SubmitButton />
       {state.message && <p className={state.ok ? "text-green-700" : "text-red-700"}>{state.message}</p>}
     </form>

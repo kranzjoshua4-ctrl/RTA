@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { MotionFade } from "@/components/motion-fade";
 import Link from "next/link";
 import { CtaBand, IndustryGrid, ProjectGrid, ServiceGrid } from "@/components/sections";
@@ -8,23 +9,21 @@ export default async function HomePage() {
 
   return (
     <div className="space-y-16">
-      <section className="rounded-3xl bg-slate-900 p-10 text-white">
-        <p className="text-sm uppercase tracking-wide text-slate-300">RTA Industrie- & Anlagenservice GmbH</p>
-        <h1 className="mt-4 text-4xl font-bold">Industrie- & Anlagenservice. Präzise. Sicher. Termintreu.</h1>
-        <p className="mt-4 max-w-3xl text-slate-200">RTA realisiert Montage, Rohrleitungsbau und Schweißtechnik – mit klaren Leistungspaketen, Projektverantwortung und sauberer Dokumentation.</p>
-        <div className="mt-6 flex gap-3">
-          <Link className="rounded bg-brand px-4 py-2 font-semibold" href="/kontakt">Projekt anfragen</Link>
-          <Link className="rounded border border-white px-4 py-2" href="/leistungen">Leistungen ansehen</Link>
+      <section className="grid items-center gap-8 rounded-3xl bg-slate-900 p-8 text-white lg:grid-cols-2">
+        <div>
+          <p className="text-sm uppercase tracking-wide text-slate-300">RTA Industrie- & Anlagenservice GmbH</p>
+          <h1 className="mt-4 text-4xl font-bold">Industrie- & Anlagenservice. Präzise. Sicher. Termintreu.</h1>
+          <p className="mt-4 max-w-3xl text-slate-200">RTA realisiert Montage, Rohrleitungsbau und Schweißtechnik – mit klaren Leistungspaketen, Projektverantwortung und sauberer Dokumentation.</p>
+          <div className="mt-6 flex gap-3">
+            <Link className="rounded bg-brand px-4 py-2 font-semibold" href="/kontakt">Projekt anfragen</Link>
+            <Link className="rounded border border-white px-4 py-2" href="/leistungen">Leistungen ansehen</Link>
+          </div>
         </div>
+        <Image src="/hero-industrie.svg" alt="Industrieanlage als Visualisierung" width={1200} height={700} className="rounded-2xl border border-slate-700" priority />
       </section>
 
       <section className="grid gap-3 md:grid-cols-4">
-        {[
-          "Werkvertraglich organisiert",
-          "International einsetzbare Teams",
-          "Dokumentation & Koordination",
-          "24/7 erreichbar"
-        ].map((item) => <div key={item} className="rounded-xl border p-4 text-sm font-medium">{item}</div>)}
+        {["Werkvertraglich organisiert", "International einsetzbare Teams", "Dokumentation & Koordination", "24/7 erreichbar"].map((item) => <div key={item} className="rounded-xl border p-4 text-sm font-medium">{item}</div>)}
       </section>
 
       <MotionFade><section><h2 className="mb-4 text-2xl font-bold">Leistungen</h2><ServiceGrid services={services.slice(0, 6)} /></section></MotionFade>

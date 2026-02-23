@@ -32,17 +32,22 @@ const fallbackJobs: Job[] = [
   { title: "Bauleiter / Projektleiter", location: "Bodenheim + Projektstandorte", type: "Vollzeit", description: "Koordination von Teams, Terminen und Dokumentationsanforderungen." }
 ];
 
-async function query<T>(groq: string, fallback: T): Promise<T> {
+async function query<T>(groq: string, fallback: T, params?: Record<string, string>): Promise<T> {
   if (!sanityEnabled) return fallback;
   try {
-    return await sanityClient.fetch(groq);
+    return await sanityClient.fetch(groq, params);
   } catch {
     return fallback;
   }
 }
 
 export const getServices = () => query<Service[]>(`*[_type == "service"] | order(title asc){title, "slug": slug.current, excerpt, body, keywords}`, fallbackServices);
+export const getServiceBySlug = (slug: string) => query<Service | null>(`*[_type == "service" && slug.current == $slug][0]{title, "slug": slug.current, excerpt, body, keywords}`, fallbackServices.find((s) => s.slug === slug) ?? null, { slug });
+
 export const getIndustries = () => query<Industry[]>(`*[_type == "industry"] | order(title asc){title, "slug": slug.current, description, typicalServices}`, fallbackIndustries);
+
 export const getProjects = () => query<Project[]>(`*[_type == "project"] | order(_createdAt desc){title, "slug": slug.current, location, period, description, services}`, fallbackProjects);
+export const getProjectBySlug = (slug: string) => query<Project | null>(`*[_type == "project" && slug.current == $slug][0]{title, "slug": slug.current, location, period, description, services}`, fallbackProjects.find((p) => p.slug === slug) ?? null, { slug });
+
 export const getCertificates = () => query<Certificate[]>(`*[_type == "certificate"] | order(_createdAt desc){title, description, validity}`, fallbackCertificates);
 export const getJobs = () => query<Job[]>(`*[_type == "job"] | order(_createdAt desc){title, location, type, description, requirements, benefits, applyEmail}`, fallbackJobs);

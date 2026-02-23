@@ -2,15 +2,15 @@ import Link from "next/link";
 import { Service, Industry, Project } from "@/lib/types";
 
 export function ServiceGrid({ services }: { services: Service[] }) {
-  return <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">{services.map((s) => <article key={s.slug} className="rounded-2xl border p-5"><h3 className="font-semibold">{s.title}</h3><p className="mt-2 text-sm text-slate-600">{s.excerpt}</p></article>)}</div>;
+  return <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">{services.map((s) => <article key={s.slug} className="rounded-2xl border p-5"><h3 className="font-semibold">{s.title}</h3><p className="mt-2 text-sm text-slate-600">{s.excerpt}</p><Link href={`/leistungen/${s.slug}`} className="mt-3 inline-block text-sm font-medium text-brand">Details ansehen →</Link></article>)}</div>;
 }
 
 export function IndustryGrid({ industries }: { industries: Industry[] }) {
-  return <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">{industries.map((i) => <article key={i.slug} className="rounded-2xl border p-5"><h3 className="font-semibold">{i.title}</h3><p className="mt-2 text-sm text-slate-600">{i.description}</p></article>)}</div>;
+  return <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">{industries.map((i) => <article key={i.slug} className="rounded-2xl border p-5"><h3 className="font-semibold">{i.title}</h3><p className="mt-2 text-sm text-slate-600">{i.description}</p><Link href="/kontakt" className="mt-3 inline-block text-sm font-medium text-brand">Projekt anfragen →</Link></article>)}</div>;
 }
 
 export function ProjectGrid({ projects }: { projects: Project[] }) {
-  return <div className="grid gap-4 md:grid-cols-2">{projects.map((p) => <article key={p.slug} className="rounded-2xl border p-5"><h3 className="font-semibold">{p.title}</h3><p className="text-sm text-slate-600">{p.location} · {p.period}</p><p className="mt-2 text-sm">{p.description}</p></article>)}</div>;
+  return <div className="grid gap-4 md:grid-cols-2">{projects.map((p) => <article key={p.slug} className="rounded-2xl border p-5"><h3 className="font-semibold">{p.title}</h3><p className="text-sm text-slate-600">{p.location} · {p.period}</p><p className="mt-2 text-sm">{p.description}</p><Link href={`/projekte/${p.slug}`} className="mt-3 inline-block text-sm font-medium text-brand">Referenz öffnen →</Link></article>)}</div>;
 }
 
 export function CtaBand() {

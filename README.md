@@ -5,7 +5,8 @@ Moderne B2B Website auf Basis von **Next.js App Router + TypeScript + TailwindCS
 ## Features
 - SEO-ready (Metadata, OpenGraph, `sitemap.xml`, `robots.txt`, JSON-LD Organization)
 - CMS-gestützte Bereiche: Services, Branchen, Projekte, Zertifikate, Jobs, Pages, News
-- Kontaktformular via Server Actions mit Resend + optionalem CRM Webhook
+- Detailseiten für Leistungen und Projekte über Slugs
+- Kontaktformular via Server Actions mit Resend + optionalem CRM Webhook + optionalem Datei-Upload
 - Cookie Banner (minimal, EU-konform als Basis)
 - Responsive UI, sticky Header, CTA-Fokus
 - Sanity Studio unter `/studio`
@@ -41,6 +42,8 @@ Kontaktformular (`/kontakt`) sendet:
 - Optional POST an `CRM_WEBHOOK_URL`
 
 Honeypot-Feld ist aktiv (`website`).
+
+Optionaler Datei-Upload im Kontaktformular ist möglich (Größenlimit über `MAX_UPLOAD_MB`, Standard: 5MB).
 
 ## Hinweis zu Rechtstexten
 `/impressum` und `/datenschutz` sind strukturierte Platzhalter und müssen vor Livegang juristisch finalisiert werden.
